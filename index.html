@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d19">
+<meta name="description" content="Axely — Founder of Starnotes Studio and Digital Creator from Indonesia.">
+<title>Axely | Personal Portfolio</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #080d19;
+  color: #f5f7ff;
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  width: min(1050px, 90%);
+  margin: auto;
+}
+
+/* BACKGROUND */
+
+#stars {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.glow {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: #386dff;
+  filter: blur(150px);
+  opacity: .13;
+  z-index: -1;
+  pointer-events: none;
+  animation: glow 9s infinite alternate ease-in-out;
+}
+
+.glow.one { top: 5%; left: -150px; }
+.glow.two { bottom: 5%; right: -150px; animation-delay: 2s; }
+
+@keyframes glow {
+  to { transform: translate(100px, 80px); }
+}
+
+/* HEADER */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(8,13,25,.88);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid #202b40;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+}
+
+.logo {
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.logo span, h1 span { color: #829fff; }
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+  font-size: 12px;
+  color: #aab7ce;
+}
+
+.nav-links a:hover { color: #829fff; }
+
+/* HERO */
+
+.hero {
+  min-height: 590px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tag {
+  color: #829fff;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(45px, 9vw, 82px);
+  line-height: 1.15;
+  animation: appear 1s both;
+}
+
+.hero h2 {
+  color: #a9b9da;
+  font-size: 20px;
+  margin: 18px 0;
+  min-height: 35px;
+}
+
+.hero p {
+  color: #9baac2;
+  max-width: 580px;
+  font-size: 15px;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border: 1px solid #354563;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: .3s;
+}
+
+.btn.primary {
+  background: #829fff;
+  color: #080d19;
+  border-color: #829fff;
+  font-weight: bold;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 25px #829fff40;
+}
+
+/* SECTIONS */
+
+section { padding: 65px 0; }
+
+.section-label {
+  color: #829fff;
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.card, .social-card, .project-card {
+  background: rgba(18,27,48,.88);
+  border: 1px solid #293750;
+  border-radius: 13px;
+  padding: 25px;
+  transition: .3s;
+}
+
+.card p {
+  color: #aab7cd;
+  font-size: 14px;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 22px;
+}
+
+.info span {
+  background: #1c2b47;
+  border: 1px solid #354968;
+  padding: 6px 12px;
+  border-radius: 30px;
+  color: #b9c9e6;
+  font-size: 11px;
+}
+
+/* SOCIAL */
+
+.social-grid, .project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.social-card:hover, .project-card:hover {
+  transform: translateY(-7px);
+  border-color: #829fff;
+  box-shadow: 0 10px 35px #426dff20;
+}
+
+.social-card h3, .project-card h3 {
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+
+.social-card p, .project-card p {
+  color: #9baac2;
+  font-size: 12px;
+}
+
+.arrow {
+  float: right;
+  color: #829fff;
+  font-size: 20px;
+}
+
+/* PROJECTS */
+
+.project-type {
+  color: #829fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+/* CONTACT */
+
+.contact {
+  text-align: center;
+  padding: 45px 20px;
+  background: #121b30;
+  border: 1px solid #293750;
+  border-radius: 15px;
+}
+
+.contact p {
+  color: #aab7cd;
+  font-size: 14px;
+}
+
+/* FOOTER */
+
+footer {
+  border-top: 1px solid #202b40;
+  padding: 25px 0;
+  text-align: center;
+  color: #8391a9;
+  font-size: 12px;
+}
+
+/* SCROLL ANIMATION */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+  .nav-links { gap: 11px; font-size: 10px; }
+  .hero { min-height: 480px; }
+  .social-grid, .project-grid { grid-template-columns: 1fr; }
+  section { padding: 48px 0; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<header>
+<div class="container">
+<nav>
+<a href="#" class="logo">AXELY<span>.</span></a>
+<div class="nav-links">
+<a href="#about">About</a>
+<a href="#social">Social</a>
+<a href="#projects">Projects</a>
+</div>
+</nav>
+</div>
+</header>
+
+<main>
+<div class="container">
+
+<section class="hero">
+<div class="tag">PERSONAL PORTFOLIO / 2026</div>
+
+<h1>Hello, I'm <span>Axely.</span></h1>
+
+<h2 id="role">Founder of Starnotes Studio</h2>
+
+<p>
+Digital Creator, Minecraft Add-on Creator,
+and Technology Enthusiast from Indonesia.
+Turning creative ideas into digital experiences.
+</p>
+
+<div class="buttons">
+<a href="#projects" class="btn primary">Explore My Work ↗</a>
+<a href="#social" class="btn">Connect With Me</a>
+</div>
+</section>
+
+<section id="about" class="reveal">
+<div class="section-label">01 / INTRODUCTION</div>
+<h2 class="section-title">About Me</h2>
+
+<div class="card">
+<p>
+I'm Axely, an independent digital creator from Indonesia
+and the founder of Starnotes Studio.
+<br><br>
+I enjoy exploring technology, developing creative projects,
+and creating experiences through Minecraft and digital
+development.
+<br><br>
+Through my work, I aim to turn ideas into something
+meaningful, connect with people, and keep learning
+along the way.
+<br><br>
+This website is my personal space to showcase my identity,
+creative journey, projects, and things I'm passionate about.
+</p>
+
+<div class="info">
+<span>Indonesia</span>
+<span>Founder</span>
+<span>Digital Creator</span>
+<span>Minecraft</span>
+<span>Developer</span>
+</div>
+</div>
+</section>
+
+<section id="social" class="reveal">
+<div class="section-label">02 / FIND ME ONLINE</div>
+<h2 class="section-title">Social Media</h2>
+
+<div class="social-grid">
+
+<a class="social-card"
+href="https://www.instagram.com/axelynotes?avpt=MWhuZHJ2MTYwcHI1NA=="
+target="_blank" rel="noopener noreferrer">
+<span class="arrow">↗</span>
+<h3>Instagram</h3>
+<p>@axelynotes · Personal updates</p>
+</a>
+
+<a class="social-card"
+href="https://www.tiktok.com/@axelynotes"
+target="_blank" rel="noopener noreferrer">
+<span class="arrow">↗</span>
+<h3>TikTok</h3>
+<p>@axelynotes · Short videos</p>
+</a>
+
+<a class="social-card"
+href="https://youtube.com/@axelynotes?si=aaEvnMWIT0KOEGO9"
+target="_blank" rel="noopener noreferrer">
+<span class="arrow">↗</span>
+<h3>YouTube</h3>
+<p>@axelynotes · Videos and creations</p>
+</a>
+
+<a class="social-card"
+href="https://discord.gg/UyTh6NukBK"
+target="_blank" rel="noopener noreferrer">
+<span class="arrow">↗</span>
+<h3>Discord</h3>
+<p>Join my community</p>
+</a>
+
+</div>
+</section>
+
+<section id="projects" class="reveal">
+<div class="section-label">03 / CREATIVE WORK</div>
+<h2 class="section-title">My Projects</h2>
+
+<div class="project-grid">
+
+<div class="project-card">
+<div class="project-type">STUDIO / CREATIVE</div>
+<h3>Starnotes Studio</h3>
+<p>
+A creative studio founded by Axely,
+focused on exploring ideas and digital creations.
+</p>
+</div>
+
+<div class="project-card">
+<div class="project-type">MINECRAFT / DEVELOPMENT</div>
+<h3>Minecraft Add-ons</h3>
+<p>
+Custom Minecraft Bedrock add-ons,
+experiments, and creative projects.
+</p>
+</div>
+
+<div class="project-card">
+<div class="project-type">DIGITAL / DEVELOPMENT</div>
+<h3>Digital Experiments</h3>
+<p>
+Exploring web development, coding,
+and new digital possibilities.
+</p>
+</div>
+
+<div class="project-card">
+<div class="project-type">COMMUNITY</div>
+<h3>Online Community</h3>
+<p>
+Building connections and sharing
+creative experiences with others.
+</p>
+</div>
+
+</div>
+</section>
+
+<section class="reveal">
+<div class="contact">
+<div class="section-label">LET'S CONNECT</div>
+<h2 class="section-title">Thanks for Visiting.</h2>
+<p>
+Have a great day. Feel free to explore my work
+and connect with me.
+</p>
+
+<div class="buttons" style="justify-content:center">
+<a href="https://discord.gg/UyTh6NukBK"
+class="btn primary" target="_blank"
+rel="noopener noreferrer">
+Join My Discord ↗
+</a>
+</div>
+</div>
+</section>
+
+</div>
+</main>
+
+<footer>
+<div class="container">
+© 2026 Axely · Founder of Starnotes Studio
+<br>Designed with creativity.
+</div>
+</footer>
+
+<script>
+// ANIMATED STARS
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+
+function resizeCanvas() {
+  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = window.innerWidth * ratio;
+  canvas.height = window.innerHeight * ratio;
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+  stars = Array.from({length: 65}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    size: Math.random() * 1.5 + .3,
+    speed: Math.random() * .25 + .05,
+    opacity: Math.random() * .6 + .2
+  }));
+}
+
+function animateStars() {
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+  stars.forEach(star => {
+    star.y -= star.speed;
+
+    if (star.y < 0) {
+      star.y = window.innerHeight;
+      star.x = Math.random() * window.innerWidth;
+    }
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(160,190,255,${star.opacity})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animateStars);
+}
+
+resizeCanvas();
+animateStars();
+
+window.addEventListener("resize", resizeCanvas);
+
+
+// SCROLL REVEAL
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: .12});
+
+document.querySelectorAll(".reveal").forEach(el => {
+  observer.observe(el);
+});
+
+
+// ROTATING PROFESSION
+
+const roles = [
+  "Founder of Starnotes Studio",
+  "Digital Creator",
+  "Minecraft Add-on Creator",
+  "Technology Enthusiast"
+];
+
+let index = 0;
+const role = document.getElementById("role");
+
+setInterval(() => {
+  role.style.opacity = "0";
+
+  setTimeout(() => {
+    index = (index + 1) % roles.length;
+    role.textContent = roles[index];
+    role.style.opacity = "1";
+  }, 350);
+
+}, 3000);
+
+role.style.transition = "opacity .35s ease";
+
+</script>
+
+</body>
+</html>
