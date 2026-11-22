@@ -7,7 +7,6 @@
 <meta name="description" content="Axely — Founder of Starnotes Studio and Digital Creator from Indonesia.">
 <title>Axely | Personal Portfolio</title>
 
-<!-- Modern Typography -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -16,13 +15,11 @@
 :root {
   --bg: #070b14;
   --surface: rgba(15, 22, 38, 0.72);
-  --surface-solid: #0f1626;
   --surface-hover: rgba(22, 32, 54, 0.88);
   --border: rgba(130, 159, 255, 0.14);
   --border-hover: rgba(130, 159, 255, 0.48);
   --accent: #829fff;
   --accent-strong: #5d82ff;
-  --accent-glow: rgba(130, 159, 255, 0.25);
   --text: #f4f7ff;
   --text-secondary: #a6b4cf;
   --text-muted: #7685a3;
@@ -470,13 +467,8 @@ section { padding: 72px 0; }
   cursor: pointer;
 }
 
-.social-card:hover {
-  transform: translateY(-5px);
-}
-
-.social-card:active {
-  transform: scale(0.96);
-}
+.social-card:hover { transform: translateY(-5px); }
+.social-card:active { transform: scale(0.96); }
 
 .social-left {
   display: flex;
@@ -542,13 +534,8 @@ section { padding: 72px 0; }
   cursor: pointer;
 }
 
-.project-card:hover {
-  transform: translateY(-6px);
-}
-
-.project-card:active {
-  transform: scale(0.96);
-}
+.project-card:hover { transform: translateY(-6px); }
+.project-card:active { transform: scale(0.96); }
 
 .project-top {
   display: flex;
@@ -773,13 +760,13 @@ footer span {
   display: flex;
   align-items: center;
   gap: 11px;
-  background: rgba(12, 18, 34, 0.88);
+  background: rgba(12, 18, 34, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-hover);
   border-radius: 999px;
   padding: 7px 15px 7px 8px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 20px rgba(130, 159, 255, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 20px rgba(130, 159, 255, 0.15);
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
 }
 
@@ -848,6 +835,10 @@ footer span {
   color: var(--accent);
 }
 
+.music-status.error {
+  color: #ff7b7b;
+}
+
 .volume-box {
   display: flex;
   align-items: center;
@@ -876,7 +867,7 @@ input[type="range"].vol-slider {
   appearance: none;
   width: 68px;
   height: 4px;
-  background: linear-gradient(90deg, var(--accent) 25%, #23304a 25%);
+  background: linear-gradient(90deg, var(--accent) 50%, #23304a 50%);
   border-radius: 4px;
   outline: none;
   cursor: pointer;
@@ -885,8 +876,8 @@ input[type="range"].vol-slider {
 input[type="range"].vol-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background: #ffffff;
   border: 2px solid var(--accent);
@@ -967,7 +958,7 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
     padding: 6px 12px 6px 7px;
     gap: 8px;
   }
-  .music-meta { display: none; }
+  .music-title { display: none; }
   .volume-box { border-left: none; padding-left: 0; }
   input[type="range"].vol-slider { width: 58px; }
 }
@@ -984,8 +975,7 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
 
 <body>
 
-<!-- FILE BACKSOUND: Upload file musik bernama "backsound.mp3" di folder yang sama di GitHub -->
-<audio id="bgm" src="backsound.mp3" loop preload="auto"></audio>
+<audio id="bgm" src="./backsound.mp3" loop preload="auto"></audio>
 
 <canvas id="stars"></canvas>
 <div class="bg-grid"></div>
@@ -1009,7 +999,6 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
 <main>
 <div class="container">
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-badge">
       <span class="status-dot"></span>
@@ -1040,7 +1029,6 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
     </div>
   </section>
 
-  <!-- ABOUT -->
   <section id="about" class="reveal">
     <div class="section-header">
       <div class="section-label">01 / INTRODUCTION</div>
@@ -1074,7 +1062,6 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
     </div>
   </section>
 
-  <!-- SOCIAL MEDIA -->
   <section id="social" class="reveal">
     <div class="section-header">
       <div class="section-label">02 / FIND ME ONLINE</div>
@@ -1146,7 +1133,6 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
     </div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects" class="reveal">
     <div class="section-header">
       <div class="section-label">03 / CREATIVE WORK</div>
@@ -1262,7 +1248,6 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section class="reveal">
     <div class="contact">
       <div class="section-label">LET'S CONNECT</div>
@@ -1325,16 +1310,17 @@ input[type="range"].vol-slider::-webkit-slider-thumb:active {
   </div>
   <div class="volume-box">
     <button class="vol-btn" id="volIcon" aria-label="Mute or Unmute">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
     </button>
-    <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0.25" aria-label="Music Volume">
-    <span class="vol-percent" id="volPercent">25%</span>
+    <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0.50" aria-label="Music Volume">
+    <span class="vol-percent" id="volPercent">50%</span>
   </div>
 </div>
 
 <script>
-// 1. UI SOUND EFFECT GENERATOR (WEB AUDIO API)
+// 1. UI SOUND EFFECT GENERATOR (MOBILE BROWSER GESTURE FIXED)
 let audioCtx = null;
+let lastSfxTime = 0;
 
 function initAudioContext() {
   if (!audioCtx) {
@@ -1343,53 +1329,67 @@ function initAudioContext() {
       audioCtx = new AudioContextClass();
     }
   }
-  if (audioCtx && audioCtx.state === "suspended") {
-    audioCtx.resume();
-  }
 }
 
 function playButtonSound(type = "click") {
+  const nowMs = Date.now();
+  if (nowMs - lastSfxTime < 75) return;
+  lastSfxTime = nowMs;
+
   try {
     initAudioContext();
     if (!audioCtx) return;
 
-    const now = audioCtx.currentTime;
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+    const triggerTone = () => {
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
 
-    if (type === "toggle") {
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(540, now);
-      osc.frequency.exponentialRampToValueAtTime(920, now + 0.09);
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
-    } else if (type === "open") {
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(420, now);
-      osc.frequency.exponentialRampToValueAtTime(760, now + 0.08);
-      gain.gain.setValueAtTime(0.07, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
+      if (type === "toggle") {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(540, now);
+        osc.frequency.exponentialRampToValueAtTime(920, now + 0.09);
+        gain.gain.setValueAtTime(0.16, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.13);
+      } else if (type === "open") {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(420, now);
+        osc.frequency.exponentialRampToValueAtTime(760, now + 0.08);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+      } else {
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(720, now);
+        osc.frequency.exponentialRampToValueAtTime(1120, now + 0.055);
+        gain.gain.setValueAtTime(0.14, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.065);
+      }
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.14);
+    };
+
+    if (audioCtx.state === "suspended") {
+      audioCtx.resume().then(triggerTone).catch(() => {});
     } else {
-      osc.type = "triangle";
-      osc.frequency.setValueAtTime(700, now);
-      osc.frequency.exponentialRampToValueAtTime(1080, now + 0.05);
-      gain.gain.setValueAtTime(0.07, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+      triggerTone();
     }
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start(now);
-    osc.stop(now + 0.13);
   } catch (e) {}
 }
 
 document.querySelectorAll(".sfx-btn").forEach(el => {
-  el.addEventListener("pointerdown", () => playButtonSound("click"));
+  el.addEventListener("pointerdown", () => {
+    if (audioCtx && audioCtx.state === "running") {
+      playButtonSound("click");
+    }
+  });
+  el.addEventListener("click", () => playButtonSound("click"));
 });
 
 
-// 2. BACKSOUND & VOLUME CONTROLLER
+// 2. BACKSOUND & VOLUME CONTROLLER (MOBILE UNLOCK FIXED)
 const bgm = document.getElementById("bgm");
 const musicWidget = document.getElementById("musicWidget");
 const musicToggle = document.getElementById("musicToggle");
@@ -1402,9 +1402,9 @@ const svgMute = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" str
 const svgLow = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
 const svgHigh = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
 
-bgm.volume = 0.25;
+bgm.volume = 0.50;
 let userPausedManually = false;
-let lastVolume = 0.25;
+let lastVolume = 0.50;
 
 function updateVolumeUI(val) {
   const pct = Math.round(val * 100);
@@ -1419,11 +1419,33 @@ function updateVolumeUI(val) {
   }
 }
 
+bgm.addEventListener("error", () => {
+  musicStatus.textContent = "AUDIO ERROR";
+  musicStatus.classList.add("error");
+  musicWidget.classList.remove("playing");
+});
+
 function startBgm() {
+  if (bgm.error) {
+    musicStatus.textContent = "AUDIO ERROR";
+    musicStatus.classList.add("error");
+    return;
+  }
+
   bgm.play().then(() => {
     musicWidget.classList.add("playing");
+    musicStatus.classList.remove("error");
     musicStatus.textContent = "PLAYING";
-  }).catch(() => {});
+    document.removeEventListener("click", unlockBgmOnGesture);
+    document.removeEventListener("touchend", unlockBgmOnGesture);
+  }).catch((err) => {
+    if (err && err.name === "NotSupportedError") {
+      musicStatus.textContent = "FORMAT ERROR";
+      musicStatus.classList.add("error");
+    } else {
+      musicStatus.textContent = "TAP TO PLAY";
+    }
+  });
 }
 
 function pauseBgm() {
@@ -1431,6 +1453,19 @@ function pauseBgm() {
   musicWidget.classList.remove("playing");
   musicStatus.textContent = "PAUSED";
 }
+
+function unlockBgmOnGesture() {
+  initAudioContext();
+  if (audioCtx && audioCtx.state === "suspended") {
+    audioCtx.resume().catch(() => {});
+  }
+  if (bgm.paused && !userPausedManually) {
+    startBgm();
+  }
+}
+
+document.addEventListener("click", unlockBgmOnGesture);
+document.addEventListener("touchend", unlockBgmOnGesture);
 
 musicToggle.addEventListener("click", (e) => {
   e.stopPropagation();
@@ -1458,17 +1493,11 @@ volIcon.addEventListener("click", (e) => {
     bgm.volume = 0;
     volSlider.value = 0;
   } else {
-    bgm.volume = lastVolume || 0.25;
+    bgm.volume = lastVolume || 0.50;
     volSlider.value = bgm.volume;
   }
   updateVolumeUI(bgm.volume);
 });
-
-document.addEventListener("pointerdown", () => {
-  if (bgm.paused && !userPausedManually) {
-    startBgm();
-  }
-}, { once: true });
 
 
 // 3. SPOTLIGHT CARD TRACKING & PROJECT DETAIL MODAL
@@ -1658,6 +1687,8 @@ window.addEventListener("scroll", () => {
   const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
   scrollProgress.style.width = progress + "%";
 }, { passive: true });
+
+
 // 7. ROTATING PROFESSION
 const roles = [
   "Founder of Starnotes Studio",
