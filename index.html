@@ -3,136 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d19">
+<meta name="theme-color" content="#070b14">
 <meta name="description" content="Axely — Founder of Starnotes Studio and Digital Creator from Indonesia.">
 <title>Axely | Personal Portfolio</title>
 
+<!-- Modern Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
+:root {
+  --bg: #070b14;
+  --surface: rgba(15, 22, 38, 0.72);
+  --surface-solid: #0f1626;
+  --surface-hover: rgba(22, 32, 54, 0.88);
+  --border: rgba(130, 159, 255, 0.14);
+  --border-hover: rgba(130, 159, 255, 0.48);
+  --accent: #829fff;
+  --accent-strong: #5d82ff;
+  --accent-glow: rgba(130, 159, 255, 0.25);
+  --text: #f4f7ff;
+  --text-secondary: #a6b4cf;
+  --text-muted: #7685a3;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
 
 body {
-  background: #080d19;
-  color: #f5f7ff;
-  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
   line-height: 1.7;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(130, 159, 255, 0.3);
+  color: #fff;
 }
 
 a { text-decoration: none; color: inherit; }
 
 .container {
-  width: min(1050px, 90%);
+  width: min(1040px, 90%);
   margin: auto;
 }
 
-/* BACKGROUND */
+/* AMBIENT BACKGROUND & GRID */
 
 #stars {
   position: fixed;
   inset: 0;
+  z-index: -3;
+  pointer-events: none;
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
   z-index: -2;
   pointer-events: none;
+  background-image: 
+    linear-gradient(rgba(130, 159, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(130, 159, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 30%, #000 30%, transparent 100%);
 }
 
 .glow {
   position: fixed;
-  width: 350px;
-  height: 350px;
+  width: 420px;
+  height: 420px;
   border-radius: 50%;
-  background: #386dff;
-  filter: blur(150px);
-  opacity: .13;
+  background: radial-gradient(circle, #386dff 0%, transparent 70%);
+  filter: blur(90px);
+  opacity: 0.16;
   z-index: -1;
   pointer-events: none;
-  animation: glow 9s infinite alternate ease-in-out;
+  animation: glowFloat 12s infinite alternate ease-in-out;
 }
 
-.glow.one { top: 5%; left: -150px; }
-.glow.two { bottom: 5%; right: -150px; animation-delay: 2s; }
+.glow.one { top: -8%; left: -120px; }
+.glow.two { bottom: 5%; right: -120px; animation-delay: 3s; }
 
-@keyframes glow {
-  to { transform: translate(100px, 80px); }
+@keyframes glowFloat {
+  to { transform: translate(70px, 60px) scale(1.08); }
 }
 
-/* HEADER */
+/* HEADER & SCROLL PROGRESS */
 
 header {
   position: sticky;
   top: 0;
-  z-index: 20;
-  background: rgba(8,13,25,.88);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid #202b40;
+  z-index: 30;
+  background: rgba(7, 11, 20, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+.scroll-progress {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-strong), var(--accent), #d6e0ff);
+  box-shadow: 0 0 12px var(--accent);
+  transition: width 0.08s ease-out;
 }
 
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 0;
+  padding: 16px 0;
 }
 
 .logo {
-  font-size: 23px;
-  font-weight: 900;
-  letter-spacing: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.logo span, h1 span { color: #829fff; }
+.logo:active { transform: scale(0.93); }
+.logo span { color: var(--accent); }
 
 .nav-links {
   display: flex;
-  gap: 22px;
-  font-size: 12px;
-  color: #aab7ce;
+  align-items: center;
+  gap: 8px;
 }
 
-.nav-links a:hover { color: #829fff; }
+.nav-links a {
+  position: relative;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.25s, background 0.25s, transform 0.2s;
+}
 
-/* HERO */
+.nav-links a:hover {
+  color: var(--text);
+  background: rgba(130, 159, 255, 0.08);
+}
+
+.nav-links a:active { transform: scale(0.93); }
+
+/* HERO SECTION */
 
 .hero {
-  min-height: 590px;
+  min-height: calc(100vh - 70px);
+  max-height: 760px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 50px 0;
 }
 
-.tag {
-  color: #829fff;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(130, 159, 255, 0.08);
+  border: 1px solid rgba(130, 159, 255, 0.22);
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 4px;
-  margin-bottom: 20px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-bottom: 24px;
+  animation: fadeUp 0.7s both;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6ee7b7;
+  box-shadow: 0 0 10px #6ee7b7;
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
 }
 
 .hero h1 {
-  font-size: clamp(45px, 9vw, 82px);
-  line-height: 1.15;
-  animation: appear 1s both;
+  font-size: clamp(44px, 8.5vw, 80px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  animation: fadeUp 0.85s both 0.08s;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, #ffffff 10%, #a5bcff 55%, #698bff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 28px rgba(130, 159, 255, 0.28));
+}
+
+.role-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0 20px;
+  min-height: 36px;
+  animation: fadeUp 0.95s both 0.16s;
+}
+
+.role-prefix {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent);
 }
 
 .hero h2 {
-  color: #a9b9da;
-  font-size: 20px;
-  margin: 18px 0;
-  min-height: 35px;
+  color: #cdd8f0;
+  font-size: clamp(17px, 3vw, 21px);
+  font-weight: 600;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 .hero p {
-  color: #9baac2;
-  max-width: 580px;
-  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 560px;
+  font-size: 15.5px;
+  line-height: 1.75;
+  animation: fadeUp 1.05s both 0.24s;
 }
 
-@keyframes appear {
-  from { opacity: 0; transform: translateY(35px); }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -140,144 +268,398 @@ nav {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-top: 28px;
+  margin-top: 32px;
+  animation: fadeUp 1.15s both 0.32s;
 }
+
+/* INTERACTIVE BUTTONS */
 
 .btn {
-  padding: 12px 22px;
-  border: 1px solid #354563;
-  border-radius: 8px;
-  font-size: 13px;
-  transition: .3s;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  background: rgba(18, 27, 48, 0.7);
+  border: 1px solid var(--border-hover);
+  border-radius: 12px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s, border-color 0.3s, background 0.3s;
 }
 
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 75%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-25deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+
+.btn:hover::before { left: 145%; }
+
 .btn.primary {
-  background: #829fff;
-  color: #080d19;
-  border-color: #829fff;
-  font-weight: bold;
+  background: linear-gradient(135deg, #93adff 0%, #6d8eff 100%);
+  color: #060a14;
+  border-color: transparent;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(114, 146, 255, 0.28);
 }
 
 .btn:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 25px #829fff40;
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(130, 159, 255, 0.25);
 }
 
-/* SECTIONS */
+.btn.primary:hover {
+  box-shadow: 0 10px 30px rgba(130, 159, 255, 0.45);
+}
 
-section { padding: 65px 0; }
+.btn:active {
+  transform: scale(0.94) translateY(0);
+}
+
+.btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.25s ease;
+}
+
+.btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+/* SECTIONS & HEADERS */
+
+section { padding: 72px 0; }
+
+.section-header {
+  margin-bottom: 28px;
+}
 
 .section-label {
-  color: #829fff;
-  font-size: 11px;
-  letter-spacing: 3px;
-  margin-bottom: 10px;
+  display: inline-block;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  margin-bottom: 8px;
 }
 
 .section-title {
-  font-size: 30px;
-  margin-bottom: 25px;
+  font-size: clamp(26px, 4vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
-.card, .social-card, .project-card {
-  background: rgba(18,27,48,.88);
-  border: 1px solid #293750;
-  border-radius: 13px;
-  padding: 25px;
-  transition: .3s;
+/* SPOTLIGHT GLASS CARDS */
+
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
-.card p {
-  color: #aab7cd;
-  font-size: 14px;
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(130, 159, 255, 0.13), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+.spotlight-card:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-hover);
+  box-shadow: 0 14px 38px rgba(4, 8, 20, 0.55), 0 0 25px rgba(130, 159, 255, 0.12);
+}
+
+/* ABOUT CARD */
+
+.about-card {
+  padding: 32px;
+}
+
+.about-card p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.about-card strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .info {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 22px;
+  gap: 10px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
 }
 
 .info span {
-  background: #1c2b47;
-  border: 1px solid #354968;
-  padding: 6px 12px;
-  border-radius: 30px;
-  color: #b9c9e6;
-  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(130, 159, 255, 0.08);
+  border: 1px solid rgba(130, 159, 255, 0.2);
+  padding: 7px 14px;
+  border-radius: 999px;
+  color: #cddaff;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s, background 0.25s, color 0.25s;
 }
 
-/* SOCIAL */
+.info span:hover {
+  border-color: var(--accent);
+  background: rgba(130, 159, 255, 0.16);
+  color: #fff;
+  transform: translateY(-2px);
+}
 
-.social-grid, .project-grid {
+.info span:active {
+  transform: scale(0.92);
+  background: var(--accent);
+  color: #070b14;
+}
+
+/* SOCIAL GRID */
+
+.social-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 16px;
 }
 
-.social-card:hover, .project-card:hover {
-  transform: translateY(-7px);
-  border-color: #829fff;
-  box-shadow: 0 10px 35px #426dff20;
+.social-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 24px;
+  cursor: pointer;
 }
 
-.social-card h3, .project-card h3 {
-  font-size: 17px;
-  margin-bottom: 5px;
+.social-card:hover {
+  transform: translateY(-5px);
 }
 
-.social-card p, .project-card p {
-  color: #9baac2;
-  font-size: 12px;
+.social-card:active {
+  transform: scale(0.96);
 }
 
-.arrow {
-  float: right;
-  color: #829fff;
-  font-size: 20px;
+.social-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-/* PROJECTS */
+.social-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(130, 159, 255, 0.1);
+  border: 1px solid rgba(130, 159, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.social-card:hover .social-icon-box {
+  background: var(--accent);
+  color: #070b14;
+  transform: scale(1.06);
+}
+
+.social-card h3 {
+  font-size: 16.5px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.social-card p {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+
+.arrow-icon {
+  color: var(--text-muted);
+  transition: transform 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.social-card:hover .arrow-icon {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+
+/* PROJECT GRID */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px;
+  cursor: pointer;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+}
+
+.project-card:active {
+  transform: scale(0.96);
+}
+
+.project-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.project-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(130, 159, 255, 0.1);
+  border: 1px solid rgba(130, 159, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
 
 .project-type {
-  color: #829fff;
-  font-size: 10px;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  background: rgba(130, 159, 255, 0.08);
+  padding: 4px 10px;
+  border-radius: 6px;
 }
 
-/* CONTACT */
+.project-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.project-card p {
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.project-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid rgba(130, 159, 255, 0.1);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.project-card:hover .project-footer {
+  color: var(--accent);
+}
+
+/* CONTACT CTA */
 
 .contact {
+  position: relative;
+  overflow: hidden;
   text-align: center;
-  padding: 45px 20px;
-  background: #121b30;
-  border: 1px solid #293750;
-  border-radius: 15px;
+  padding: 54px 24px;
+  background: linear-gradient(180deg, rgba(18, 27, 48, 0.85) 0%, rgba(11, 17, 32, 0.95) 100%);
+  border: 1px solid var(--border-hover);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
 .contact p {
-  color: #aab7cd;
-  font-size: 14px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  max-width: 460px;
+  margin: 0 auto;
 }
 
 /* FOOTER */
 
 footer {
-  border-top: 1px solid #202b40;
-  padding: 25px 0;
+  border-top: 1px solid var(--border);
+  padding: 28px 0 92px;
   text-align: center;
-  color: #8391a9;
-  font-size: 12px;
+  color: var(--text-muted);
+  font-size: 12.5px;
 }
 
-/* SCROLL ANIMATION */
+footer span {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* SCROLL REVEAL */
 
 .reveal {
   opacity: 0;
-  transform: translateY(35px);
-  transition: opacity .8s ease, transform .8s ease;
+  transform: translateY(30px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.show {
@@ -285,16 +667,312 @@ footer {
   transform: translateY(0);
 }
 
-/* MOBILE */
+/* PROJECT DETAIL MODAL */
 
-@media(max-width:600px) {
-  .nav-links { gap: 11px; font-size: 10px; }
-  .hero { min-height: 480px; }
-  .social-grid, .project-grid { grid-template-columns: 1fr; }
-  section { padding: 48px 0; }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(4, 7, 14, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
 }
 
-@media(prefers-reduced-motion:reduce) {
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-box {
+  width: min(480px, 100%);
+  background: #0e1526;
+  border: 1px solid var(--border-hover);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(130, 159, 255, 0.15);
+  transform: scale(0.92) translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-backdrop.open .modal-box {
+  transform: scale(1) translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.modal-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(130, 159, 255, 0.15);
+  color: #fff;
+}
+
+.modal-close:active { transform: scale(0.9); }
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.modal-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.75;
+  margin-bottom: 18px;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.modal-tags span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: rgba(130, 159, 255, 0.1);
+  color: var(--accent);
+}
+
+/* FLOATING MUSIC & VOLUME CONTROLLER */
+
+.music-widget {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: rgba(12, 18, 34, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-hover);
+  border-radius: 999px;
+  padding: 7px 15px 7px 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55), 0 0 20px rgba(130, 159, 255, 0.12);
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s;
+}
+
+.music-widget:hover {
+  border-color: var(--accent);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 26px rgba(130, 159, 255, 0.28);
+}
+
+.music-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #95afff 0%, #6d8eff 100%);
+  color: #070b14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(130, 159, 255, 0.35);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.music-btn:active { transform: scale(0.88); }
+
+.eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 13px;
+}
+
+.eq-bars span {
+  width: 2.5px;
+  height: 5px;
+  background: #070b14;
+  border-radius: 2px;
+  transition: height 0.2s;
+}
+
+.music-widget.playing .eq-bars span:nth-child(1) { animation: eq 0.55s infinite alternate ease-in-out; }
+.music-widget.playing .eq-bars span:nth-child(2) { animation: eq 0.42s infinite alternate-reverse ease-in-out 0.12s; }
+.music-widget.playing .eq-bars span:nth-child(3) { animation: eq 0.65s infinite alternate ease-in-out 0.25s; }
+
+@keyframes eq {
+  0% { height: 4px; }
+  100% { height: 13px; }
+}
+
+.music-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.music-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.music-status {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--accent);
+}
+
+.volume-box {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-left: 6px;
+  border-left: 1px solid rgba(130, 159, 255, 0.15);
+}
+
+.vol-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.vol-btn:hover { color: var(--accent); }
+.vol-btn:active { transform: scale(0.85); }
+
+input[type="range"].vol-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 68px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 25%, #23304a 25%);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].vol-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 8px rgba(130, 159, 255, 0.85);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+input[type="range"].vol-slider::-webkit-slider-thumb:active {
+  transform: scale(1.3);
+}
+
+.vol-percent {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  min-width: 28px;
+  text-align: right;
+}
+
+/* TAP RIPPLE & PARTICLE BURST ANIMATION */
+
+.tap-ripple {
+  position: fixed;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  background: rgba(130, 159, 255, 0.18);
+  transform: translate(-50%, -50%) scale(0.2);
+  pointer-events: none;
+  z-index: 9999;
+  animation: rippleBurst 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rippleBurst {
+  to {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+.tap-spark {
+  position: fixed;
+  width: 4.5px;
+  height: 4.5px;
+  border-radius: 50%;
+  background: #b5c8ff;
+  box-shadow: 0 0 8px var(--accent);
+  pointer-events: none;
+  z-index: 9999;
+  animation: sparkFly 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes sparkFly {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
+    opacity: 0;
+  }
+}
+
+/* MOBILE RESPONSIVE */
+
+@media(max-width: 640px) {
+  .nav-links { gap: 4px; }
+  .nav-links a { padding: 6px 10px; font-size: 12px; }
+  .hero { min-height: 500px; padding: 36px 0; }
+  .social-grid, .project-grid { grid-template-columns: 1fr; }
+  section { padding: 52px 0; }
+  .about-card { padding: 24px; }
+  .music-widget {
+    bottom: 14px;
+    right: 14px;
+    padding: 6px 12px 6px 7px;
+    gap: 8px;
+  }
+  .music-meta { display: none; }
+  .volume-box { border-left: none; padding-left: 0; }
+  input[type="range"].vol-slider { width: 58px; }
+}
+
+@media(prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
@@ -306,198 +984,595 @@ footer {
 
 <body>
 
+<!-- FILE BACKSOUND: Upload file musik bernama "backsound.mp3" di folder yang sama di GitHub -->
+<audio id="bgm" src="backsound.mp3" loop preload="auto"></audio>
+
 <canvas id="stars"></canvas>
+<div class="bg-grid"></div>
 <div class="glow one"></div>
 <div class="glow two"></div>
 
 <header>
-<div class="container">
-<nav>
-<a href="#" class="logo">AXELY<span>.</span></a>
-<div class="nav-links">
-<a href="#about">About</a>
-<a href="#social">Social</a>
-<a href="#projects">Projects</a>
-</div>
-</nav>
-</div>
+  <div class="container">
+    <nav>
+      <a href="#" class="logo sfx-btn">AXELY<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about" class="sfx-btn">About</a>
+        <a href="#social" class="sfx-btn">Social</a>
+        <a href="#projects" class="sfx-btn">Projects</a>
+      </div>
+    </nav>
+  </div>
+  <div class="scroll-progress" id="scrollProgress"></div>
 </header>
 
 <main>
 <div class="container">
 
-<section class="hero">
-<div class="tag">PERSONAL PORTFOLIO / 2026</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span class="status-dot"></span>
+      <span>PERSONAL PORTFOLIO · 2026</span>
+    </div>
 
-<h1>Hello, I'm <span>Axely.</span></h1>
+    <h1>Hello, I'm <span>Axely.</span></h1>
 
-<h2 id="role">Founder of Starnotes Studio</h2>
+    <div class="role-wrapper">
+      <span class="role-prefix">&gt;_</span>
+      <h2 id="role">Founder of Starnotes Studio</h2>
+    </div>
 
-<p>
-Digital Creator, Minecraft Add-on Creator,
-and Technology Enthusiast from Indonesia.
-Turning creative ideas into digital experiences.
-</p>
+    <p>
+      Digital Creator, Minecraft Add-on Creator,
+      and Technology Enthusiast from Indonesia.
+      Turning creative ideas into meaningful digital experiences.
+    </p>
 
-<div class="buttons">
-<a href="#projects" class="btn primary">Explore My Work ↗</a>
-<a href="#social" class="btn">Connect With Me</a>
-</div>
-</section>
+    <div class="buttons">
+      <a href="#projects" class="btn primary sfx-btn">
+        <span>Explore My Work</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
+      <a href="#social" class="btn sfx-btn">
+        <span>Connect With Me</span>
+      </a>
+    </div>
+  </section>
 
-<section id="about" class="reveal">
-<div class="section-label">01 / INTRODUCTION</div>
-<h2 class="section-title">About Me</h2>
+  <!-- ABOUT -->
+  <section id="about" class="reveal">
+    <div class="section-header">
+      <div class="section-label">01 / INTRODUCTION</div>
+      <h2 class="section-title">About Me</h2>
+    </div>
 
-<div class="card">
-<p>
-I'm Axely, an independent digital creator from Indonesia
-and the founder of Starnotes Studio.
-<br><br>
-I enjoy exploring technology, developing creative projects,
-and creating experiences through Minecraft and digital
-development.
-<br><br>
-Through my work, I aim to turn ideas into something
-meaningful, connect with people, and keep learning
-along the way.
-<br><br>
-This website is my personal space to showcase my identity,
-creative journey, projects, and things I'm passionate about.
-</p>
+    <div class="spotlight-card about-card">
+      <p>
+        I'm <strong>Axely</strong>, an independent digital creator from Indonesia
+        and the founder of <strong>Starnotes Studio</strong>.
+        <br><br>
+        I enjoy exploring technology, developing creative projects,
+        and crafting immersive experiences through <strong>Minecraft</strong> and digital
+        development.
+        <br><br>
+        Through my work, I aim to turn ideas into something
+        meaningful, connect with people, and keep learning
+        along the way.
+        <br><br>
+        This website is my personal space to showcase my identity,
+        creative journey, projects, and the things I'm passionate about.
+      </p>
 
-<div class="info">
-<span>Indonesia</span>
-<span>Founder</span>
-<span>Digital Creator</span>
-<span>Minecraft</span>
-<span>Developer</span>
-</div>
-</div>
-</section>
+      <div class="info">
+        <span class="sfx-btn">Indonesia</span>
+        <span class="sfx-btn">Founder</span>
+        <span class="sfx-btn">Digital Creator</span>
+        <span class="sfx-btn">Minecraft</span>
+        <span class="sfx-btn">Developer</span>
+      </div>
+    </div>
+  </section>
 
-<section id="social" class="reveal">
-<div class="section-label">02 / FIND ME ONLINE</div>
-<h2 class="section-title">Social Media</h2>
+  <!-- SOCIAL MEDIA -->
+  <section id="social" class="reveal">
+    <div class="section-header">
+      <div class="section-label">02 / FIND ME ONLINE</div>
+      <h2 class="section-title">Social Media</h2>
+    </div>
 
-<div class="social-grid">
+    <div class="social-grid">
 
-<a class="social-card"
-href="https://www.instagram.com/axelynotes?avpt=MWhuZHJ2MTYwcHI1NA=="
-target="_blank" rel="noopener noreferrer">
-<span class="arrow">↗</span>
-<h3>Instagram</h3>
-<p>@axelynotes · Personal updates</p>
-</a>
+      <a class="spotlight-card social-card sfx-btn"
+         href="https://www.instagram.com/axelynotes?avpt=MWhuZHJ2MTYwcHI1NA=="
+         target="_blank" rel="noopener noreferrer">
+        <div class="social-left">
+          <div class="social-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          </div>
+          <div>
+            <h3>Instagram</h3>
+            <p>@axelynotes · Personal updates</p>
+          </div>
+        </div>
+        <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
 
-<a class="social-card"
-href="https://www.tiktok.com/@axelynotes"
-target="_blank" rel="noopener noreferrer">
-<span class="arrow">↗</span>
-<h3>TikTok</h3>
-<p>@axelynotes · Short videos</p>
-</a>
+      <a class="spotlight-card social-card sfx-btn"
+         href="https://www.tiktok.com/@axelynotes"
+         target="_blank" rel="noopener noreferrer">
+        <div class="social-left">
+          <div class="social-icon-box">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+          </div>
+          <div>
+            <h3>TikTok</h3>
+            <p>@axelynotes · Short videos</p>
+          </div>
+        </div>
+        <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
 
-<a class="social-card"
-href="https://youtube.com/@axelynotes?si=aaEvnMWIT0KOEGO9"
-target="_blank" rel="noopener noreferrer">
-<span class="arrow">↗</span>
-<h3>YouTube</h3>
-<p>@axelynotes · Videos and creations</p>
-</a>
+      <a class="spotlight-card social-card sfx-btn"
+         href="https://youtube.com/@axelynotes?si=aaEvnMWIT0KOEGO9"
+         target="_blank" rel="noopener noreferrer">
+        <div class="social-left">
+          <div class="social-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          </div>
+          <div>
+            <h3>YouTube</h3>
+            <p>@axelynotes · Videos & creations</p>
+          </div>
+        </div>
+        <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
 
-<a class="social-card"
-href="https://discord.gg/UyTh6NukBK"
-target="_blank" rel="noopener noreferrer">
-<span class="arrow">↗</span>
-<h3>Discord</h3>
-<p>Join my community</p>
-</a>
+      <a class="spotlight-card social-card sfx-btn"
+         href="https://discord.gg/UyTh6NukBK"
+         target="_blank" rel="noopener noreferrer">
+        <div class="social-left">
+          <div class="social-icon-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div>
+            <h3>Discord</h3>
+            <p>Join my community</p>
+          </div>
+        </div>
+        <svg class="arrow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+      </a>
 
-</div>
-</section>
+    </div>
+  </section>
 
-<section id="projects" class="reveal">
-<div class="section-label">03 / CREATIVE WORK</div>
-<h2 class="section-title">My Projects</h2>
+  <!-- PROJECTS -->
+  <section id="projects" class="reveal">
+    <div class="section-header">
+      <div class="section-label">03 / CREATIVE WORK</div>
+      <h2 class="section-title">My Projects</h2>
+    </div>
 
-<div class="project-grid">
+    <div class="project-grid">
 
-<div class="project-card">
-<div class="project-type">STUDIO / CREATIVE</div>
-<h3>Starnotes Studio</h3>
-<p>
-A creative studio founded by Axely,
-focused on exploring ideas and digital creations.
-</p>
-</div>
+      <div class="spotlight-card project-card sfx-btn"
+           data-tag="STUDIO / CREATIVE"
+           data-title="Starnotes Studio"
+           data-desc="An independent creative and development studio founded by Axely, dedicated to building original digital creations, interactive tools, and community-driven projects."
+           data-tags="Creative Direction,Brand Identity,Digital Studio"
+           data-link="https://discord.gg/UyTh6NukBK"
+           data-cta="Join Studio Community">
+        <div>
+          <div class="project-top">
+            <div class="project-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <span class="project-type">STUDIO / CREATIVE</span>
+          </div>
+          <h3>Starnotes Studio</h3>
+          <p>
+            A creative studio founded by Axely,
+            focused on exploring ideas and digital creations.
+          </p>
+        </div>
+        <div class="project-footer">
+          <span>View Details</span>
+          <span>↗</span>
+        </div>
+      </div>
 
-<div class="project-card">
-<div class="project-type">MINECRAFT / DEVELOPMENT</div>
-<h3>Minecraft Add-ons</h3>
-<p>
-Custom Minecraft Bedrock add-ons,
-experiments, and creative projects.
-</p>
-</div>
+      <div class="spotlight-card project-card sfx-btn"
+           data-tag="MINECRAFT / DEVELOPMENT"
+           data-title="Minecraft Add-ons"
+           data-desc="Custom Minecraft Bedrock Edition behavior packs, custom UI mechanics, and optimization packs designed for smooth gameplay and unique survival experiences."
+           data-tags="Bedrock Edition,Scripting API,Custom UI"
+           data-link="https://youtube.com/@axelynotes?si=aaEvnMWIT0KOEGO9"
+           data-cta="Watch Showcases">
+        <div>
+          <div class="project-top">
+            <div class="project-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+            <span class="project-type">MINECRAFT / DEV</span>
+          </div>
+          <h3>Minecraft Add-ons</h3>
+          <p>
+            Custom Minecraft Bedrock add-ons,
+            experiments, and creative projects.
+          </p>
+        </div>
+        <div class="project-footer">
+          <span>View Details</span>
+          <span>↗</span>
+        </div>
+      </div>
 
-<div class="project-card">
-<div class="project-type">DIGITAL / DEVELOPMENT</div>
-<h3>Digital Experiments</h3>
-<p>
-Exploring web development, coding,
-and new digital possibilities.
-</p>
-</div>
+      <div class="spotlight-card project-card sfx-btn"
+           data-tag="DIGITAL / DEVELOPMENT"
+           data-title="Digital Experiments"
+           data-desc="Interactive web prototypes, front-end experiments, and creative coding projects built to push boundaries and test new digital possibilities."
+           data-tags="HTML / CSS / JS,Web Design,Prototyping"
+           data-link="https://www.tiktok.com/@axelynotes"
+           data-cta="See Experiments">
+        <div>
+          <div class="project-top">
+            <div class="project-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <span class="project-type">DIGITAL / DEV</span>
+          </div>
+          <h3>Digital Experiments</h3>
+          <p>
+            Exploring web development, coding,
+            and new digital possibilities.
+          </p>
+        </div>
+        <div class="project-footer">
+          <span>View Details</span>
+          <span>↗</span>
+        </div>
+      </div>
 
-<div class="project-card">
-<div class="project-type">COMMUNITY</div>
-<h3>Online Community</h3>
-<p>
-Building connections and sharing
-creative experiences with others.
-</p>
-</div>
+      <div class="spotlight-card project-card sfx-btn"
+           data-tag="COMMUNITY"
+           data-title="Online Community"
+           data-desc="An active Discord hub for creators, players, and supporters to share feedback, follow development updates, and connect directly with Axely."
+           data-tags="Discord Server,Creative Hub,Updates"
+           data-link="https://discord.gg/UyTh6NukBK"
+           data-cta="Join Discord Server">
+        <div>
+          <div class="project-top">
+            <div class="project-icon">
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <span class="project-type">COMMUNITY</span>
+          </div>
+          <h3>Online Community</h3>
+          <p>
+            Building connections and sharing
+            creative experiences with others.
+          </p>
+        </div>
+        <div class="project-footer">
+          <span>View Details</span>
+          <span>↗</span>
+        </div>
+      </div>
 
-</div>
-</section>
+    </div>
+  </section>
 
-<section class="reveal">
-<div class="contact">
-<div class="section-label">LET'S CONNECT</div>
-<h2 class="section-title">Thanks for Visiting.</h2>
-<p>
-Have a great day. Feel free to explore my work
-and connect with me.
-</p>
+  <!-- CONTACT -->
+  <section class="reveal">
+    <div class="contact">
+      <div class="section-label">LET'S CONNECT</div>
+      <h2 class="section-title">Thanks for Visiting.</h2>
+      <p>
+        Have a great day. Feel free to explore my work,
+        share ideas, and connect with me on Discord.
+      </p>
 
-<div class="buttons" style="justify-content:center">
-<a href="https://discord.gg/UyTh6NukBK"
-class="btn primary" target="_blank"
-rel="noopener noreferrer">
-Join My Discord ↗
-</a>
-</div>
-</div>
-</section>
+      <div class="buttons" style="justify-content:center">
+        <a href="https://discord.gg/UyTh6NukBK"
+           class="btn primary sfx-btn" target="_blank"
+           rel="noopener noreferrer">
+          <span>Join My Discord</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
 </div>
 </main>
 
 <footer>
-<div class="container">
-© 2026 Axely · Founder of Starnotes Studio
-<br>Designed with creativity.
-</div>
+  <div class="container">
+    © 2026 <span>Axely</span> · Founder of <span>Starnotes Studio</span>
+    <br>Designed with creativity.
+  </div>
 </footer>
 
-<script>
-// ANIMATED STARS
+<!-- PROJECT DETAIL MODAL -->
+<div class="modal-backdrop" id="projectModal" aria-hidden="true">
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <span class="project-type" id="modalTag">PROJECT</span>
+      <button class="modal-close sfx-btn" id="modalClose" aria-label="Close modal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <h3 class="modal-title" id="modalTitle">Project Title</h3>
+    <p class="modal-desc" id="modalDesc">Project description goes here.</p>
+    <div class="modal-tags" id="modalTags"></div>
+    <a href="#" target="_blank" rel="noopener noreferrer" class="btn primary sfx-btn" id="modalLink" style="width:100%">
+      <span id="modalCta">Open Link</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+    </a>
+  </div>
+</div>
 
+<!-- FLOATING MUSIC & VOLUME CONTROLLER -->
+<div class="music-widget" id="musicWidget" title="Backsound & Volume">
+  <button class="music-btn" id="musicToggle" aria-label="Play or Pause Music">
+    <div class="eq-bars" id="eqIcon">
+      <span></span><span></span><span></span>
+    </div>
+  </button>
+  <div class="music-meta">
+    <span class="music-title">Backsound</span>
+    <span class="music-status" id="musicStatus">TAP TO PLAY</span>
+  </div>
+  <div class="volume-box">
+    <button class="vol-btn" id="volIcon" aria-label="Mute or Unmute">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    </button>
+    <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0.25" aria-label="Music Volume">
+    <span class="vol-percent" id="volPercent">25%</span>
+  </div>
+</div>
+
+<script>
+// 1. UI SOUND EFFECT GENERATOR (WEB AUDIO API)
+let audioCtx = null;
+
+function initAudioContext() {
+  if (!audioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) {
+      audioCtx = new AudioContextClass();
+    }
+  }
+  if (audioCtx && audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+}
+
+function playButtonSound(type = "click") {
+  try {
+    initAudioContext();
+    if (!audioCtx) return;
+
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    if (type === "toggle") {
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(540, now);
+      osc.frequency.exponentialRampToValueAtTime(920, now + 0.09);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    } else if (type === "open") {
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(420, now);
+      osc.frequency.exponentialRampToValueAtTime(760, now + 0.08);
+      gain.gain.setValueAtTime(0.07, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.11);
+    } else {
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(700, now);
+      osc.frequency.exponentialRampToValueAtTime(1080, now + 0.05);
+      gain.gain.setValueAtTime(0.07, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+    }
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.13);
+  } catch (e) {}
+}
+
+document.querySelectorAll(".sfx-btn").forEach(el => {
+  el.addEventListener("pointerdown", () => playButtonSound("click"));
+});
+
+
+// 2. BACKSOUND & VOLUME CONTROLLER
+const bgm = document.getElementById("bgm");
+const musicWidget = document.getElementById("musicWidget");
+const musicToggle = document.getElementById("musicToggle");
+const musicStatus = document.getElementById("musicStatus");
+const volSlider = document.getElementById("volSlider");
+const volPercent = document.getElementById("volPercent");
+const volIcon = document.getElementById("volIcon");
+
+const svgMute = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>`;
+const svgLow = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+const svgHigh = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>`;
+
+bgm.volume = 0.25;
+let userPausedManually = false;
+let lastVolume = 0.25;
+
+function updateVolumeUI(val) {
+  const pct = Math.round(val * 100);
+  volPercent.textContent = pct + "%";
+  volSlider.style.background = `linear-gradient(90deg, #829fff ${pct}%, #23304a ${pct}%)`;
+  if (val === 0) {
+    volIcon.innerHTML = svgMute;
+  } else if (val < 0.5) {
+    volIcon.innerHTML = svgLow;
+  } else {
+    volIcon.innerHTML = svgHigh;
+  }
+}
+
+function startBgm() {
+  bgm.play().then(() => {
+    musicWidget.classList.add("playing");
+    musicStatus.textContent = "PLAYING";
+  }).catch(() => {});
+}
+
+function pauseBgm() {
+  bgm.pause();
+  musicWidget.classList.remove("playing");
+  musicStatus.textContent = "PAUSED";
+}
+
+musicToggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  playButtonSound("toggle");
+  if (bgm.paused) {
+    userPausedManually = false;
+    startBgm();
+  } else {
+    userPausedManually = true;
+    pauseBgm();
+  }
+});
+
+volSlider.addEventListener("input", (e) => {
+  const val = parseFloat(e.target.value);
+  bgm.volume = val;
+  if (val > 0) lastVolume = val;
+  updateVolumeUI(val);
+});
+
+volIcon.addEventListener("click", (e) => {
+  e.stopPropagation();
+  playButtonSound("click");
+  if (bgm.volume > 0) {
+    bgm.volume = 0;
+    volSlider.value = 0;
+  } else {
+    bgm.volume = lastVolume || 0.25;
+    volSlider.value = bgm.volume;
+  }
+  updateVolumeUI(bgm.volume);
+});
+
+document.addEventListener("pointerdown", () => {
+  if (bgm.paused && !userPausedManually) {
+    startBgm();
+  }
+}, { once: true });
+
+
+// 3. SPOTLIGHT CARD TRACKING & PROJECT DETAIL MODAL
+document.querySelectorAll(".spotlight-card").forEach(card => {
+  card.addEventListener("pointermove", (e) => {
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
+    card.style.setProperty("--my", (e.clientY - rect.top) + "px");
+  });
+});
+
+const projectModal = document.getElementById("projectModal");
+const modalClose = document.getElementById("modalClose");
+const modalTag = document.getElementById("modalTag");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const modalTags = document.getElementById("modalTags");
+const modalLink = document.getElementById("modalLink");
+const modalCta = document.getElementById("modalCta");
+
+document.querySelectorAll(".project-card").forEach(card => {
+  card.addEventListener("click", () => {
+    playButtonSound("open");
+    modalTag.textContent = card.dataset.tag || "PROJECT";
+    modalTitle.textContent = card.dataset.title || "";
+    modalDesc.textContent = card.dataset.desc || "";
+    modalLink.href = card.dataset.link || "#";
+    modalCta.textContent = card.dataset.cta || "Open Link";
+
+    modalTags.innerHTML = "";
+    (card.dataset.tags || "").split(",").forEach(t => {
+      if (t.trim()) {
+        const span = document.createElement("span");
+        span.textContent = t.trim();
+        modalTags.appendChild(span);
+      }
+    });
+
+    projectModal.classList.add("open");
+    projectModal.setAttribute("aria-hidden", "false");
+  });
+});
+
+function closeModal() {
+  projectModal.classList.remove("open");
+  projectModal.setAttribute("aria-hidden", "true");
+}
+
+modalClose.addEventListener("click", closeModal);
+projectModal.addEventListener("click", (e) => {
+  if (e.target === projectModal) closeModal();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && projectModal.classList.contains("open")) closeModal();
+});
+
+
+// 4. TAP RIPPLE & PARTICLE BURST EFFECT
+function spawnTapEffect(x, y, isButton = false) {
+  const ripple = document.createElement("div");
+  ripple.className = "tap-ripple";
+  ripple.style.left = x + "px";
+  ripple.style.top = y + "px";
+  document.body.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 580);
+
+  const sparkCount = isButton ? 8 : 5;
+  for (let i = 0; i < sparkCount; i++) {
+    const spark = document.createElement("div");
+    spark.className = "tap-spark";
+    const angle = (Math.PI * 2 * i) / sparkCount + (Math.random() * 0.45);
+    const dist = (isButton ? 34 : 22) + Math.random() * 20;
+    spark.style.left = x + "px";
+    spark.style.top = y + "px";
+    spark.style.setProperty("--dx", Math.cos(angle) * dist + "px");
+    spark.style.setProperty("--dy", Math.sin(angle) * dist + "px");
+    document.body.appendChild(spark);
+    setTimeout(() => spark.remove(), 580);
+  }
+}
+
+document.addEventListener("pointerdown", (e) => {
+  const isInteractive = Boolean(e.target.closest(".sfx-btn, .music-btn, .vol-btn, button, a"));
+  spawnTapEffect(e.clientX, e.clientY, isInteractive);
+});
+
+
+// 5. CONSTELLATION STARFIELD CANVAS
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
 let stars = [];
+let pointer = { x: null, y: null };
+let animId = null;
+
+window.addEventListener("pointermove", (e) => {
+  pointer.x = e.clientX;
+  pointer.y = e.clientY;
+});
+
+window.addEventListener("pointerleave", () => {
+  pointer.x = null;
+  pointer.y = null;
+});
 
 function resizeCanvas() {
   const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -507,12 +1582,12 @@ function resizeCanvas() {
   canvas.style.height = window.innerHeight + "px";
   ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
-  stars = Array.from({length: 65}, () => ({
+  stars = Array.from({ length: 68 }, () => ({
     x: Math.random() * window.innerWidth,
     y: Math.random() * window.innerHeight,
-    size: Math.random() * 1.5 + .3,
-    speed: Math.random() * .25 + .05,
-    opacity: Math.random() * .6 + .2
+    size: Math.random() * 1.5 + 0.35,
+    speed: Math.random() * 0.22 + 0.05,
+    opacity: Math.random() * 0.55 + 0.2
   }));
 }
 
@@ -529,21 +1604,42 @@ function animateStars() {
 
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(160,190,255,${star.opacity})`;
+    ctx.fillStyle = `rgba(170, 198, 255, ${star.opacity})`;
     ctx.fill();
+
+    if (pointer.x !== null && pointer.y !== null) {
+      const dx = star.x - pointer.x;
+      const dy = star.y - pointer.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 135) {
+        ctx.beginPath();
+        ctx.moveTo(star.x, star.y);
+        ctx.lineTo(pointer.x, pointer.y);
+        ctx.strokeStyle = `rgba(130, 159, 255, ${(1 - dist / 135) * 0.24})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    }
   });
 
-  requestAnimationFrame(animateStars);
+  animId = requestAnimationFrame(animateStars);
 }
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden && animId) {
+    cancelAnimationFrame(animId);
+    animId = null;
+  } else if (!document.hidden && !animId) {
+    animateStars();
+  }
+});
 
 resizeCanvas();
 animateStars();
-
 window.addEventListener("resize", resizeCanvas);
 
 
-// SCROLL REVEAL
-
+// 6. SCROLL REVEAL & PROGRESS BAR
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -551,15 +1647,18 @@ const observer = new IntersectionObserver(entries => {
       observer.unobserve(entry.target);
     }
   });
-}, {threshold: .12});
+}, { threshold: 0.12 });
 
-document.querySelectorAll(".reveal").forEach(el => {
-  observer.observe(el);
-});
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-
-// ROTATING PROFESSION
-
+const scrollProgress = document.getElementById("scrollProgress");
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  scrollProgress.style.width = progress + "%";
+}, { passive: true });
+// 7. ROTATING PROFESSION
 const roles = [
   "Founder of Starnotes Studio",
   "Digital Creator",
@@ -567,22 +1666,20 @@ const roles = [
   "Technology Enthusiast"
 ];
 
-let index = 0;
-const role = document.getElementById("role");
+let roleIndex = 0;
+const roleEl = document.getElementById("role");
 
 setInterval(() => {
-  role.style.opacity = "0";
+  roleEl.style.opacity = "0";
+  roleEl.style.transform = "translateY(6px)";
 
   setTimeout(() => {
-    index = (index + 1) % roles.length;
-    role.textContent = roles[index];
-    role.style.opacity = "1";
-  }, 350);
-
-}, 3000);
-
-role.style.transition = "opacity .35s ease";
-
+    roleIndex = (roleIndex + 1) % roles.length;
+    roleEl.textContent = roles[roleIndex];
+    roleEl.style.opacity = "1";
+    roleEl.style.transform = "translateY(0)";
+  }, 320);
+}, 3200);
 </script>
 
 </body>
